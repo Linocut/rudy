@@ -5505,6 +5505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ruby
       objectReference: {fileID: 0}
+    - target: {fileID: 5380360092667069236, guid: d7b5a57554dc79449b9aa2641788bb1f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5380360092667069243, guid: d7b5a57554dc79449b9aa2641788bb1f, type: 3}
       propertyPath: m_RootOrder
       value: 1
