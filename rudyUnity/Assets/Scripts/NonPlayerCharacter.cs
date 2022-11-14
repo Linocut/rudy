@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NonPlayerCharacter : MonoBehaviour
 {
+
     public float displayTime = 4.0f;
     public GameObject dialogBox;
     float timerDisplay;
@@ -30,5 +32,9 @@ public class NonPlayerCharacter : MonoBehaviour
     {
         timerDisplay = displayTime;
         dialogBox.SetActive(true);
+    }
+    public void newScene()
+    {
+        SceneManager.LoadScene("Scene2");
     }
 }

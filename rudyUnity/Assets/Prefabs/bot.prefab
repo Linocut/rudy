@@ -150,9 +150,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  vertical: 0
+  vertical: 1
   changeTime: 2
   smokeEffect: {fileID: 6868975501647958847}
+  PartOne: 0
+  text: {fileID: 0}
 --- !u!95 &-1617657435538273390
 Animator:
   serializedVersion: 4

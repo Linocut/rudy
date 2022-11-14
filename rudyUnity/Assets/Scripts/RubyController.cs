@@ -15,6 +15,7 @@ public class RubyController : MonoBehaviour
     
     public int health { get { return currentHealth; }}
     int currentHealth;
+    public int currentCog;
     
     public float timeInvincible = 2.0f;
     bool isInvincible;
@@ -25,7 +26,9 @@ public class RubyController : MonoBehaviour
     float vertical;
     public ParticleSystem healthEffect;
     public ParticleSystem damageEffect;
-    
+
+    public GameObject text;
+
     Animator animator;
     Vector2 lookDirection = new Vector2(1,0);
     
@@ -34,6 +37,7 @@ public class RubyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentCog = 4;
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         
@@ -45,6 +49,7 @@ public class RubyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
         
@@ -69,7 +74,11 @@ public class RubyController : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.C))
         {
-            Launch();
+            if (currentCog > 0)
+            {
+                Launch();
+            }
+            
         }
         
         if (Input.GetKeyDown(KeyCode.X))
@@ -82,6 +91,12 @@ public class RubyController : MonoBehaviour
                 {
                     character.DisplayDialog();
                 }
+                TextController textScript = text.gameObject.GetComponent<TextController>();
+                if (character != null && textScript.win == true)
+                {
+                    character.newScene();
+                }
+
             }
         }
     }
@@ -116,12 +131,22 @@ public class RubyController : MonoBehaviour
         }
 
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        
         UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
+        if (currentHealth == 0)
+        {
+            TextController textScript = text.gameObject.GetComponent<TextController>();
+            textScript.lose();
+        }
+    }
+    public void ChangeCog(int amount)
+    {
+        currentCog = currentCog + amount;
+        
     }
     
     void Launch()
     {
+        currentCog = currentCog - 1;
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
 
         Projectile projectile = projectileObject.GetComponent<Projectile>();

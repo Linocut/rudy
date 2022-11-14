@@ -8,11 +8,13 @@ using UnityEngine;
     public bool vertical;
     public float changeTime = 3.0f;
     public ParticleSystem smokeEffect;
+    public int PartOne;
     Rigidbody2D rigidbody2D;
     float timer;
     int direction = 1;
     bool broken = true;
-    
+    public GameObject text;
+
     Animator animator;
     
     // Start is called before the first frame update
@@ -80,6 +82,8 @@ using UnityEngine;
     //Public because we want to call it from elsewhere like the projectile script
     public void Fix()
     {
+        TextController textcounter = text.gameObject.GetComponent<TextController>();
+        textcounter.change();
         broken = false;
         rigidbody2D.simulated = false;
         //optional if you added the fixed animation
