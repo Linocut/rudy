@@ -83,9 +83,10 @@ public class HardEnemyController : MonoBehaviour
     public void Fix()
     {
         TextController textcounter = text.gameObject.GetComponent<TextController>();
-        textcounter.change();
         broken = false;
         rigidbody2D.simulated = false;
+        textcounter.change();
+        
         //optional if you added the fixed animation
         animator.SetTrigger("Fixed");
         smokeEffect.Stop();
