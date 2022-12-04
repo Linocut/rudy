@@ -154,7 +154,7 @@ MonoBehaviour:
   changeTime: 2
   smokeEffect: {fileID: 6868975501647958847}
   PartOne: 0
-  text: {fileID: 0}
+  text: {fileID: 4004546168097117518, guid: 96951edc96ee77942a79c625ee398d86, type: 3}
 --- !u!95 &-1617657435538273390
 Animator:
   serializedVersion: 4

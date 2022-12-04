@@ -170,9 +170,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  vertical: 0
+  vertical: 1
   changeTime: 2
   smokeEffect: {fileID: 6868975501647958847}
+  text: {fileID: 4004546168097117518, guid: 96951edc96ee77942a79c625ee398d86, type: 3}
 --- !u!1 &6274853728135833024
 GameObject:
   m_ObjectHideFlags: 0

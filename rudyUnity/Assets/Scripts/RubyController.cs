@@ -28,15 +28,28 @@ public class RubyController : MonoBehaviour
     public ParticleSystem damageEffect;
 
     public GameObject text;
+    public int currentSuperCogs;
 
     Animator animator;
-    Vector2 lookDirection = new Vector2(1,0);
-    
+    public Vector2 lookDirection;
+    Vector2 cogTwoDirection = new Vector2(1, 0);
+
     AudioSource audioSource;
+
+    //public GameObject directionalLine;
+    /*public GameObject directionalLineTwo;
+    public GameObject directionalLineThree;*/
+
+   // launcher[] guns;
+    //bool shoot; 
     
     // Start is called before the first frame update
     void Start()
     {
+
+       // guns = transform.GetComponentsInChildren<launcher>();
+
+        currentSuperCogs = 0;
         currentCog = 4;
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -57,14 +70,35 @@ public class RubyController : MonoBehaviour
         
         if(!Mathf.Approximately(move.x, 0.0f) || !Mathf.Approximately(move.y, 0.0f))
         {
+            
             lookDirection.Set(move.x, move.y);
             lookDirection.Normalize();
+            cogTwoDirection.Set(move.x -30 , move.y - 30);
+            cogTwoDirection.Normalize();
+
         }
         
         animator.SetFloat("Look X", lookDirection.x);
         animator.SetFloat("Look Y", lookDirection.y);
         animator.SetFloat("Speed", move.magnitude);
+        /*
+
+        Vector3 tired = new Vector3(lookDirection.x, lookDirection.y, 0);
+        float rotation_z = Mathf.Atan2(tired.y, tired.x) * Mathf.Rad2Deg;
+        directionalLine.transform.rotation = Quaternion.Euler(0f, 0f, rotation_z);
+
+     
         
+        Vector3 tiredTwo = new Vector3(lookDirection.x, lookDirection.y, 0);
+        float rotation_zTwo = Mathf.Atan2(tiredTwo.y, tiredTwo.x) * Mathf.Rad2Deg;
+        directionalLineTwo.transform.rotation = Quaternion.Euler(0f, 0f, rotation_zTwo + 30f);
+
+        
+        Vector3 tiredThree = new Vector3(lookDirection.x, lookDirection.y, 0);
+        float rotation_zThree = Mathf.Atan2(tiredThree.y, tiredThree.x) * Mathf.Rad2Deg;
+        directionalLineThree.transform.rotation = Quaternion.Euler(0f, 0f, rotation_zThree - 30f);
+        */
+
         if (isInvincible)
         {
             invincibleTimer -= Time.deltaTime;
@@ -81,6 +115,25 @@ public class RubyController : MonoBehaviour
             
         }
         
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            if (currentSuperCogs > 0)
+            {
+                LaunchTwo();
+            }
+        }
+        /*
+        shoot = Input.GetKeyDown(KeyCode.Z);
+        if (shoot)
+        {
+            shoot = false;
+            foreach (launcher gun in guns)
+            {
+                gun.Shoot();
+            }
+  
+        }
+        */
         if (Input.GetKeyDown(KeyCode.X))
         {
             RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, lookDirection, 1.5f, LayerMask.GetMask("NPC"));
@@ -138,6 +191,10 @@ public class RubyController : MonoBehaviour
             textScript.lose();
         }
     }
+    public void SuperCogs(int add)
+    {
+        currentSuperCogs = currentSuperCogs + add; 
+    }
     public void ChangeCog(int amount)
     {
         currentCog = currentCog + amount;
@@ -148,14 +205,28 @@ public class RubyController : MonoBehaviour
     {
         currentCog = currentCog - 1;
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
-
+   
         Projectile projectile = projectileObject.GetComponent<Projectile>();
         projectile.Launch(lookDirection, 300);
+        
 
         animator.SetTrigger("Launch");
         
         PlaySound(throwSound);
     } 
+    void LaunchTwo()
+    {
+        currentSuperCogs = currentSuperCogs - 1;
+        GameObject projectileObjectTwo = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
+
+        Projectile projectileTwo = projectileObjectTwo.GetComponent<Projectile>();
+        projectileTwo.LaunchTwo(lookDirection, 300);
+        animator.SetTrigger("Launch");
+
+        PlaySound(throwSound);
+
+    }
+    
     
     public void PlaySound(AudioClip clip)
     {

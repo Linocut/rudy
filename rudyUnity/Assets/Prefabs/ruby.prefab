@@ -286,10 +286,12 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6066055703733850255, guid: 4df0daecceb19a84095c2fda9939b7d7, type: 3}
   throwSound: {fileID: 0}
   hitSound: {fileID: 0}
+  currentCog: 0
   timeInvincible: 2
   healthEffect: {fileID: 0}
   damageEffect: {fileID: 0}
   text: {fileID: 0}
+  currentSuperCogs: 0
 --- !u!50 &4992950329128550042
 Rigidbody2D:
   serializedVersion: 4

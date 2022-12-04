@@ -8,6 +8,7 @@ public class TextController : MonoBehaviour
 {
     public Text enemyCount;
     public int robotCount = 0;
+    public int coggieCount = 0; 
     public Text endText;
     public GameObject rudy;
     public bool gameOver = false;
@@ -17,6 +18,7 @@ public class TextController : MonoBehaviour
     public int view;
     public GameObject talk;
     public Text cog;
+
     void Start()
     {
        endText.gameObject.SetActive(false);
@@ -24,9 +26,9 @@ public class TextController : MonoBehaviour
     void Update()
     {
         RubyController rubyCog = rudy.gameObject.GetComponent<RubyController>();
-        cog.text = "Cogs: " + rubyCog.currentCog;
+        cog.text = "Cogs: " + rubyCog.currentCog + "\nSpecial Cogs: "+ rubyCog.currentSuperCogs;
         view = level;
-        enemyCount.text = "Fixed Robots: " + robotCount.ToString() + "/4";
+        enemyCount.text = "Fixed Robots: " + robotCount.ToString() + "/4\n" + "Cog enemies: " + coggieCount.ToString();
         if ((robotCount == 4 || win == true) && level == 1 )
         {
             talk.gameObject.SetActive(true);
@@ -68,6 +70,10 @@ public class TextController : MonoBehaviour
     public void change()
     {
         robotCount = robotCount + 1;
+    }
+    public void CoggieChange()
+    {
+        coggieCount = coggieCount + 1; 
     }
     public void lose()
     {
