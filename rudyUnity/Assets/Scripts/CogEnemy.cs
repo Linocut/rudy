@@ -58,7 +58,6 @@ public class CogEnemy : MonoBehaviour
     {
         coggieHits = coggieHits + 1;
         smokeEffect.Play();
-        Debug.Log(coggieHits);
         if (coggieHits == 2)
         {
             damageEffect.Play();
